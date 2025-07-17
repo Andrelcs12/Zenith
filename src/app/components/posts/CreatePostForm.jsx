@@ -80,10 +80,10 @@ const CreatePostForm = ({ onPostCreated }) => {
 
   return (
     <div className="bg-gray-800 p-6 rounded-lg shadow-md mb-8 border border-gray-700">
-      <h2 className="text-xl font-semibold text-white mb-4">O que você está pensando?</h2>
+      <h2 className=" text-base md:text-lg font-semibold text-white mb-4">O que você está pensando?</h2>
       <form onSubmit={handleSubmit}>
         <textarea
-          className="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-purple-600 focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 transition duration-200 resize-y"
+          className="w-full p-3 rounded-lg text-sm md:text-lg bg-gray-700 text-white border border-gray-600 focus:border-purple-600 focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 transition duration-200 resize-y"
           rows="3"
           placeholder="Compartilhe suas ideias, projetos ou perguntas..."
           value={content}
@@ -106,7 +106,7 @@ const CreatePostForm = ({ onPostCreated }) => {
         )}
 
         <div className="flex justify-between items-center mt-4">
-          <label htmlFor="image-upload" className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-300 rounded-lg cursor-pointer hover:bg-gray-600 transition duration-200">
+          <label htmlFor="image-upload" className="flex items-center gap-2 px-4 text-sm md:text-lg py-2 bg-gray-700 text-gray-300 rounded-lg cursor-pointer hover:bg-gray-600 transition duration-200">
             <ImageIcon size={20} />
             Adicionar Imagem
             <input
@@ -123,7 +123,7 @@ const CreatePostForm = ({ onPostCreated }) => {
 
           <button
             type="submit"
-            className="flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200 disabled:opacity-50"
+            className="flex items-center text-sm md:text-lg justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200 disabled:opacity-50"
             disabled={loading}
           >
             {loading ? <Loader2 className="animate-spin" size={20} /> : <PlusSquare size={20} />}

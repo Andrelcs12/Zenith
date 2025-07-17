@@ -14,50 +14,42 @@ const FeedPage = () => {
   const router = useRouter();
   const [posts, setPosts] = useState([]);
   const [loadingPosts, setLoadingPosts] = useState(true);
-  const [feedType, setFeedType] = useState('following'); // 'following' ou 'forYou'
-  const [hasFollowedUsers, setHasFollowedUsers] = useState(false); // Indica se o usuário segue alguém (para o feed 'Seguindo')
+  const [feedType, setFeedType] = useState('following');
+  const [hasFollowedUsers, setHasFollowedUsers] = useState(false);
 
-  // Função para buscar posts do Firestore com base no tipo de feed
+
   const fetchPosts = async () => {
     setLoadingPosts(true);
     try {
-      if (!user) { // Garante que o usuário esteja disponível antes de buscar
+      if (!user) {
         setLoadingPosts(false);
         return;
       }
 
       let q;
       if (feedType === 'following') {
-        // 1. Obter a lista de usuários que o usuário atual está seguindo
         const followingRef = collection(db, 'users', user.uid, 'following');
         const followingSnapshot = await getDocs(followingRef);
         const followedUserIds = followingSnapshot.docs.map(doc => doc.id);
 
         if (followedUserIds.length === 0) {
-          setPosts([]); // Nenhum post se não estiver seguindo ninguém
-          setHasFollowedUsers(false); // Define que não segue ninguém
+          setPosts([]);
+          setHasFollowedUsers(false);
           setLoadingPosts(false);
           return;
         }
+        setHasFollowedUsers(true);
 
-        setHasFollowedUsers(true); // O usuário segue pelo menos uma pessoa
-
-        // A consulta 'in' do Firestore tem um limite de 10 itens.
-        // Se precisar seguir mais de 10 usuários e mostrar todos os posts,
-        // seria necessária uma estratégia mais complexa (ex: múltiplas consultas e fusão,
-        // ou uma geração de "feed" no lado do servidor).
         const maxFollowedUsersForQuery = 10;
         const usersToQuery = followedUserIds.slice(0, maxFollowedUsersForQuery);
 
-        // 2. Consultar posts dos usuários seguidos
         q = query(
           collection(db, "posts"),
-          where("authorId", "in", usersToQuery), // Filtrar por autores que o usuário segue
+          where("authorId", "in", usersToQuery),
           orderBy("createdAt", "desc")
         );
-      } else { // feedType === 'forYou'
-        setHasFollowedUsers(true); // Não relevante para 'Para Você', assume que sempre há posts
-        // Consultar todos os posts para o feed "Para Você"
+      } else {
+        setHasFollowedUsers(true);
         q = query(
           collection(db, "posts"),
           orderBy("createdAt", "desc")
@@ -76,19 +68,17 @@ const FeedPage = () => {
     }
   };
 
-  // Função para lidar com a exclusão de posts
   const handleDeletePost = async (postId) => {
     try {
       await deleteDoc(firestoreDoc(db, 'posts', postId));
       toast.success('Post deletado com sucesso!');
-      fetchPosts(); // Buscar posts novamente após a exclusão
+      fetchPosts();
     } catch (error) {
       console.error('Erro ao deletar post:', error);
       toast.error('Erro ao deletar post. Tente novamente.');
     }
   };
 
-  // Efeito para buscar posts sempre que o usuário ou o tipo de feed mudar
   useEffect(() => {
     if (authLoading) {
       return;
@@ -101,7 +91,7 @@ const FeedPage = () => {
     }
 
     fetchPosts();
-  }, [user, authLoading, router, feedType]); // Re-executa quando o usuário ou o tipo de feed muda
+  }, [user, authLoading, router, feedType]);
 
   if (authLoading || loadingPosts) {
     return (
@@ -115,24 +105,22 @@ const FeedPage = () => {
   return (
     <div className='flex flex-col lg:flex-row w-full min-h-screen bg-gray-950 text-white'>
       <Sidebar />
-      <main className='flex-grow p-4 md:p-8 lg:ml-72'>
+      <main className='flex-grow p-4 md:p-8 lg:ml-72 pb-16 lg:pb-4'>
         <div className="max-w-4xl mx-auto">
-          {/* Título do Feed */}
+
           <h1 className="text-3xl font-bold text-white mb-8">
             {feedType === 'following' ? 'Seu Feed (Seguindo)' : 'Feed Para Você'}
           </h1>
 
-          {/* Seletor de Feed */}
+
           <div className="mb-8 flex justify-center space-x-4">
-            <button
-              onClick={() => setFeedType('following')}
+            <button onClick={() => setFeedType('following')}
               className={`px-6 py-2 rounded-full font-semibold transition-colors duration-200
                 ${feedType === 'following' ? 'bg-purple-600 text-white shadow-lg' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}
             >
               Seguindo
             </button>
-            <button
-              onClick={() => setFeedType('forYou')}
+            <button onClick={() => setFeedType('forYou')}
               className={`px-6 py-2 rounded-full font-semibold transition-colors duration-200
                 ${feedType === 'forYou' ? 'bg-purple-600 text-white shadow-lg' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}
             >
@@ -142,7 +130,6 @@ const FeedPage = () => {
 
           <CreatePostForm onPostCreated={fetchPosts} />
 
-          {/* Renderização Condicional do Feed */}
           {feedType === 'following' && !hasFollowedUsers ? (
             <div className="text-center p-8 bg-gray-800 rounded-lg shadow-md">
               <p className="text-gray-300 text-lg mb-4">
@@ -151,10 +138,7 @@ const FeedPage = () => {
               <p className="text-gray-400 mb-6">
                 Comece a seguir outros usuários para ver as postagens deles aqui!
               </p>
-              <button
-                onClick={() => router.push('/communities')}
-                className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200"
-              >
+              <button onClick={() => router.push('/communities')} className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200">
                 Descobrir Usuários
               </button>
             </div>
@@ -166,11 +150,7 @@ const FeedPage = () => {
             ) : (
               <div>
                 {posts.map(post => (
-                  <PostCard
-                    key={post.id}
-                    post={post}
-                    currentUserId={user?.uid}
-                    onDelete={handleDeletePost}
+                  <PostCard key={post.id} post={post} currentUserId={user?.uid} onDelete={handleDeletePost}
                   />
                 ))}
               </div>
