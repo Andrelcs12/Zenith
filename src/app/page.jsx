@@ -19,7 +19,6 @@ const HomePage = () => {
 
     // Se não houver usuário logado (user é null), redireciona para a página de cadastro
     if (!user) {
-      toast.error('Você precisa estar logado para acessar esta página.');
       router.push('/auth/cadastro'); // Redireciona para a página de cadastro
       return; // Importante para parar a execução após o redirecionamento
     }
