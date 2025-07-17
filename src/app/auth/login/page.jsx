@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -93,7 +92,7 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 to-black p-4 font-sans antialiased">
       <div className="bg-gray-800 p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-700">
-        <h1 className="text-4xl font-extrabold text-white text-center mb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-white text-center mb-8">
           Bem-vindo de volta à <span className="text-purple-600">Zenith</span>
         </h1>
 
@@ -103,7 +102,7 @@ const LoginPage = () => {
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
               <input type="email" id="email" placeholder="seu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required
-                className="shadow-sm appearance-none border border-gray-700 rounded-lg w-full py-3 pl-10 pr-4 text-white bg-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition duration-200"
+                className="shadow-sm appearance-none border border-gray-700 rounded-lg w-full py-3 pl-10 pr-4 text-white bg-gray-700 text-sm md:text-base leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition duration-200"
                 disabled={loading} />
             </div>
           </div>
@@ -112,12 +111,12 @@ const LoginPage = () => {
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
               <input type="password" id="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} required
-                className="shadow-sm appearance-none border border-gray-700 rounded-lg w-full py-3 pl-10 pr-4 text-white bg-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition duration-200"
+                className="shadow-sm appearance-none border border-gray-700 rounded-lg w-full py-3 pl-10 pr-4 text-white bg-gray-700 text-sm md:text-base leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition duration-200"
                 disabled={loading}
               />
             </div>
           </div>
-          <button type="submit" className="w-full cursor-pointer bg-purple-700 hover:bg-purple-600 active:bg-purple-800 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg" disabled={loading}>
+          <button type="submit" className="w-full cursor-pointer bg-purple-700 hover:bg-purple-600 active:bg-purple-800 text-white font-bold py-3 px-4 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg" disabled={loading}>
             {loading ? (
               <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
             ) : (
@@ -133,12 +132,12 @@ const LoginPage = () => {
             <div className="w-full border-t border-gray-700"></div>
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-gray-800 text-gray-400">Ou continue com</span>
+            <span className="px-2 bg-gray-800 text-gray-400 text-sm md:text-base">Ou continue com</span>
           </div>
         </div>
 
         <div className="space-y-4">
-          <button onClick={() => handleSocialLogin('google')} className="w-full cursor-pointer bg-red-600 hover:bg-red-500 active:bg-red-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg"
+          <button onClick={() => handleSocialLogin('google')} className="w-full cursor-pointer bg-red-600 hover:bg-red-500 active:bg-red-700 text-white font-bold py-3 px-4 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg"
             disabled={loading}>
             {loading ? (
               <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
@@ -148,7 +147,7 @@ const LoginPage = () => {
               </>
             )}
           </button>
-          <button onClick={() => handleSocialLogin('github')} className="w-full cursor-pointer bg-gray-700 hover:bg-gray-600 active:bg-gray-900 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg"
+          <button onClick={() => handleSocialLogin('github')} className="w-full cursor-pointer bg-gray-700 hover:bg-gray-600 active:bg-gray-900 text-white font-bold py-3 px-4 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg"
             disabled={loading} >
             {loading ? (
               <div className="animate-spin flex rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
@@ -163,7 +162,7 @@ const LoginPage = () => {
 
         <p className="text-center text-gray-400 text-sm mt-8"> Não tem uma conta?{' '}
           <Link href="/auth/cadastro"
-            className="text-purple-500 cursor-pointer hover:text-purple-400 font-bold focus:outline-none flex items-center justify-center gap-1 mx-auto mt-2">
+            className="text-purple-500 cursor-pointer hover:text-purple-400 font-bold focus:outline-none flex items-center justify-center gap-1 mx-auto mt-2 text-sm md:text-base">
             <UserPlus size={16} /> Cadastre-se aqui
           </Link>
         </p>
