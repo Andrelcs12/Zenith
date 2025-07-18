@@ -391,7 +391,7 @@ const ProfilePage = () => {
   const isOwner = currentUser && currentUser.uid === profileUid;
 
   return (
-    <div className='flex flex-col lg:flex-row w-full min-h-screen bg-gray-950 text-white'>
+    <div className='flex md:pl-72 flex-col lg:flex-row w-full min-h-screen bg-gray-950 text-white'>
       <Sidebar />
 
       <div className='flex flex-grow flex-col lg:flex-row gap-4 lg:gap-8 p-4 md:p-8'>
