@@ -52,8 +52,8 @@ const Sidebar = () => {
   };
 
   return (
-    <div className='fixed md:px-4 bottom-0 left-0 right-0 z-50 bg-gray-900 border-t border-gray-700
-                   lg:static lg:w-72 lg:h-screen lg:border-r lg:border-gray-700 lg:flex lg:flex-col lg:py-4'>
+    <div className='fixed md:px-4 str bottom-0 left-0 right-0 z-50 bg-gray-900 border-t border-gray-700
+                   lg:w-72 lg:h-screen lg:border-r lg:border-gray-700 lg:flex lg:flex-col lg:py-4'>
 
       <div className="hidden lg:block mb-10 mt-4">
         <h1 className='font-extrabold text-5xl text-purple-500 text-center'>Zenith</h1>
